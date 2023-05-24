@@ -42,7 +42,7 @@
 
 //#include "chip.h"
 #include <stdbool.h>
-
+#include "calculadora.h"
 
 /* === Macros definitions ====================================================================== */
 
