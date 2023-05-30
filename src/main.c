@@ -2,7 +2,7 @@
  * Facultad de Ciencias Exactas y Tecnología
  * Universidad Nacional de Tucuman
  * http://www.microprocesadores.unt.edu.ar/
- * Copyright 2022, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+ * Copyright 2022, Juan Ignacio Ajmat <juan.ajmat@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,8 +40,7 @@
 
 /* === Headers files inclusions =============================================================== */
 
-//#include "chip.h"
-#include <stdbool.h>
+#include <stdio.h>
 #include "calculadora.h"
 
 /* === Macros definitions ====================================================================== */
@@ -52,22 +51,69 @@
 
 /* === Private function declarations =========================================================== */
 
+int Suma(int a, int b);
+
+int Resta(int a, int b);
+
+int Producto(int a, int b);
+
+int Cociente(int a, int b);
+
 /* === Public variable definitions ============================================================= */
 
 /* === Private variable definitions ============================================================ */
 
 /* === Private function implementation ========================================================= */
 
-/* === Public function implementation ========================================================= */
+int Suma(int a, int b) {
+    return (a + b);
+}
+
+int Resta(int a, int b) {
+    return (a - b);
+}
+
+int Producto(int a, int b) {
+    return (a * b);
+}
+
+int Cociente(int a, int b) {
+    return (a / b);
+}
+
+/* === Public function implementation ========================================================== */
 
 int main(void) {
 
+    int resultado = 0;
     
+    calculadora_t mi_calculadora = CrearCalculadora();
+
+    
+    AgregarOperacion(mi_calculadora, '+', Suma);
+    AgregarOperacion(mi_calculadora, '+', Resta);
+    AgregarOperacion(mi_calculadora, '*', Producto);
+    AgregarOperacion(mi_calculadora, '/', Cociente);
+
+   
+    resultado = Calcular(mi_calculadora, "10+2");
+    printf("10 + 2 = %i\n", resultado);
+
+    resultado = Calcular(mi_calculadora, "10-2");
+    printf("10 - 2 = %i\n", resultado);
+
+    resultado = Calcular(mi_calculadora, "10*2");
+    printf("10 x 2 = %i\n", resultado);
+
+    resultado = Calcular(mi_calculadora, "10/2");
+    printf("10 / 2 = %i\n", resultado);
 
     return 0;
-
 }
 
+/**
+ * \endcond
+ */
 
 /* === End of documentation ==================================================================== */
 

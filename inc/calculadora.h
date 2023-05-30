@@ -2,7 +2,7 @@
  * Facultad de Ciencias Exactas y Tecnología
  * Universidad Nacional de Tucuman
  * http://www.microprocesadores.unt.edu.ar/
- * Copyright 2022, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+ * Copyright 2022, Juan Ignacio Ajmat <juan.ajmat@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,36 +39,45 @@
  ** @{ */
 
 /* === Headers files inclusions =============================================================== */
-
-//#include "chip.h"
+#ifndef CALCULADORA_H
+#define CALCULADORA_H
 #include <stdbool.h>
 
+/* === Cabecera C++ ============================================================================ */
 
-/* === Macros definitions ====================================================================== */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/* === Private data type declarations ========================================================== */
+/* === Public macros definitions =============================================================== */
 
-/* === Private variable declarations =========================================================== */
+/* === Public data type declarations =========================================================== */
 
-/* === Private function declarations =========================================================== */
+/// Declaración del descriptor para la clase calculadora
+typedef struct calculadora_s * calculadora_t;
 
-/* === Public variable definitions ============================================================= */
+typedef int (*funcion_t)(int, int);
 
-/* === Private variable definitions ============================================================ */
+/* === Public variable declarations ============================================================ */
 
-/* === Private function implementation ========================================================= */
-
-/* === Public function implementation ========================================================= */
-
-int main(void) {
-
-    
-
-    return 0;
-
-}
+/* === Public function declarations ============================================================ */
 
 
+calculadora_t CrearCalculadora(void);
+
+bool AgregarOperacion(calculadora_t calculadora, char operador, funcion_t funcion);
+
+
+int Calcular(calculadora_t calculadora, char * cadena);
+
+
+void BorrarCalculadora( calculadora_t calculadora);
 /* === End of documentation ==================================================================== */
 
+#ifdef __cplusplus
+}
+#endif
+
 /** @} End of module definition for doxygen */
+
+#endif 
