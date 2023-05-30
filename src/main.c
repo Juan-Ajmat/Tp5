@@ -90,7 +90,7 @@ int main(void) {
 
     
     AgregarOperacion(mi_calculadora, '+', Suma);
-    AgregarOperacion(mi_calculadora, '+', Resta);
+    AgregarOperacion(mi_calculadora, '-', Resta);
     AgregarOperacion(mi_calculadora, '*', Producto);
     AgregarOperacion(mi_calculadora, '/', Cociente);
 
