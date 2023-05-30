@@ -38,9 +38,13 @@
  ** \brief Sample projects to use as a starting point
  ** @{ */
 
-/* === Headers files inclusions =============================================================== */
 #ifndef CALCULADORA_H
 #define CALCULADORA_H
+
+
+
+/* === Headers files inclusions ================================================================ */
+
 #include <stdbool.h>
 
 /* === Cabecera C++ ============================================================================ */
@@ -53,7 +57,6 @@ extern "C" {
 
 /* === Public data type declarations =========================================================== */
 
-/// Declaración del descriptor para la clase calculadora
 typedef struct calculadora_s * calculadora_t;
 
 typedef int (*funcion_t)(int, int);
@@ -64,6 +67,7 @@ typedef int (*funcion_t)(int, int);
 
 
 calculadora_t CrearCalculadora(void);
+
 
 bool AgregarOperacion(calculadora_t calculadora, char operador, funcion_t funcion);
 
@@ -80,4 +84,4 @@ void BorrarCalculadora( calculadora_t calculadora);
 
 /** @} End of module definition for doxygen */
 
-#endif 
+#endif /* CALCULADORA_H */

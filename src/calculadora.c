@@ -41,46 +41,30 @@
 /* === Headers files inclusions =============================================================== */
 #include <stdio.h>
 #include "calculadora.h"
-
+#include <string.h>
+#include <stdlib.h>
 /* === Macros definitions ====================================================================== */
 
 /* === Private data type declarations ========================================================== */
+
+typedef struct operacion_s * operacion_t;
+
+struct calculadora_s {
+    operacion_t operaciones;
+};
+
+struct operacion_s {
+    char operador;
+    funcion_t funcion;
+    operacion_t siguiente;
+};
 
 /* === Private variable declarations =========================================================== */
 
 /* === Private function declarations =========================================================== */
 
-/**
- * @brief Funcion suma definida como la suma de dos enteros
- * @param a Primer número
- * @param b Segundo número
- * @return Retorna la suma como un entero.
- */
-int Suma(int a, int b);
 
-/**
- * @brief Funcion resta definida como la resta de dos enteros
- * @param a Primer número
- * @param b Segundo número
- * @return Retorna la diferencia como un entero.
- */
-int Resta(int a, int b);
-
-/**
- * @brief Funcion producto definida como la producto de dos enteros
- * @param a Primer número
- * @param b Segundo número
- * @return Retorna el producto como un entero.
- */
-int Producto(int a, int b);
-
-/**
- * @brief Funcion cociente definida como la division de dos enteros
- * @param a Dividendo
- * @param b Divisor
- * @return Retorna el cociente como un entero.
- */
-int Cociente(int a, int b);
+operacion_t BuscarOperacion(calculadora_t calculadora, char operador);
 
 /* === Public variable definitions ============================================================= */
 
@@ -88,51 +72,68 @@ int Cociente(int a, int b);
 
 /* === Private function implementation ========================================================= */
 
-int Suma(int a, int b) {
-    return (a + b);
+calculadora_t CrearCalculadora(void) {
+    calculadora_t calculadora = malloc(sizeof(struct calculadora_s));
+    if (calculadora) {
+        memset(calculadora, 0, sizeof(struct calculadora_s));
+    }
+    return calculadora;
 }
 
-int Resta(int a, int b) {
-    return (a - b);
+bool AgregarOperacion(calculadora_t calculadora, char operador, funcion_t funcion) {
+    operacion_t operacion = NULL;
+
+    if (!BuscarOperacion(calculadora, operador)) {
+        operacion = malloc(sizeof(struct operacion_s));
+    }
+    if (operacion) {
+        operacion->operador = operador;
+        operacion->funcion = funcion;
+        operacion->siguiente = calculadora->operaciones;
+        calculadora->operaciones = operacion;
+    }
+    return (operacion != NULL);
 }
 
-int Producto(int a, int b) {
-    return (a * b);
+operacion_t BuscarOperacion(calculadora_t calculadora, char operador) {
+    operacion_t result = NULL;
+    operacion_t actual = calculadora->operaciones;
+
+    if (actual != NULL) {
+        for (actual; actual != NULL; actual = actual->siguiente) {
+            if (actual->operador == operador) {
+                result = actual;
+                break;
+            }
+        }
+    }
+    return result;
 }
 
-int Cociente(int a, int b) {
-    return (a / b);
+int Calcular(calculadora_t calculadora, char * cadena) {
+    int a, b;
+    char operador;
+    int resultado = 0;
+    operacion_t operacion = NULL;
+
+    for (int index = 0; index < strlen(cadena); index++) {
+        if (cadena[index] < '0') {
+            operador = cadena[index];
+            a = atoi(cadena);
+            b = atoi(cadena + index + 1);
+            break;
+        }
+    }
+
+    operacion = BuscarOperacion(calculadora, operador);
+    if (operacion) {
+        resultado = operacion->funcion(a, b);
+    }
+
+    return resultado;
 }
 
 /* === Public function implementation ========================================================== */
-
-int main(void) {
-
-    int resultado = 0;
-    calculadora_t mi_calculadora = CrearCalculadora();
-
-    // Agregar operaciones
-    AgregarOperacion(mi_calculadora, '+', Suma);
-    AgregarOperacion(mi_calculadora, '+', Resta);
-    AgregarOperacion(mi_calculadora, '*', Producto);
-    AgregarOperacion(mi_calculadora, '/', Cociente);
-
-    // Realizo los calculos e imprimo por pantalla los resultados,
-    resultado = Calcular(mi_calculadora, "14+5");
-    printf("14 + 5 = %i\n", resultado);
-
-    resultado = Calcular(mi_calculadora, "20-10");
-    printf("20 - 10 = %i\n", resultado);
-
-    resultado = Calcular(mi_calculadora, "3*5");
-    printf("3 x 5 = %i\n", resultado);
-
-    resultado = Calcular(mi_calculadora, "789614385/5");
-    printf("789614385 / 5 = %i\n", resultado);
-   // BorrarCalculadora(mi_calculadora);
-   // mi_calculadora = NULL;
-    return 0;
-}
 
 /**
  * \endcond

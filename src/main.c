@@ -60,11 +60,6 @@ int Producto(int a, int b);
 int Cociente(int a, int b);
 
 /* === Public variable definitions ============================================================= */
-
-/* === Private variable definitions ============================================================ */
-
-/* === Private function implementation ========================================================= */
-
 int Suma(int a, int b) {
     return (a + b);
 }
@@ -80,6 +75,10 @@ int Producto(int a, int b) {
 int Cociente(int a, int b) {
     return (a / b);
 }
+/* === Private variable definitions ============================================================ */
+
+/* === Private function implementation ========================================================= */
+
 
 /* === Public function implementation ========================================================== */
 
@@ -97,16 +96,16 @@ int main(void) {
 
    
     resultado = Calcular(mi_calculadora, "10+2");
-    printf("10 + 2 = %i\n", resultado);
+    printf("El resultado de la suma es:\n 10 + 2 = %i\n", resultado);
 
     resultado = Calcular(mi_calculadora, "10-2");
-    printf("10 - 2 = %i\n", resultado);
+    printf("El resultado de la resta es:\n 10 - 2 = %i\n", resultado);
 
     resultado = Calcular(mi_calculadora, "10*2");
-    printf("10 x 2 = %i\n", resultado);
+    printf("El resultado de la multiplicación es:\n 10 x 2 = %i\n", resultado);
 
     resultado = Calcular(mi_calculadora, "10/2");
-    printf("10 / 2 = %i\n", resultado);
+    printf("El resultado de la division es:\n 10 / 2 = %i\n", resultado);
 
     return 0;
 }
