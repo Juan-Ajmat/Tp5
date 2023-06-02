@@ -57,25 +57,10 @@ extern "C" {
 
 /* === Public data type declarations =========================================================== */
 
-typedef struct calculadora_s * calculadora_t;
-
-typedef int (*funcion_t)(int, int);
-
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
 
-
-calculadora_t CrearCalculadora(void);
-
-
-bool AgregarOperacion(calculadora_t calculadora, char operador, funcion_t funcion);
-
-
-int Calcular(calculadora_t calculadora, char * cadena);
-
-
-void BorrarCalculadora( calculadora_t calculadora);
 /* === End of documentation ==================================================================== */
 
 #ifdef __cplusplus
