@@ -32,7 +32,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/** \brief Simple sample of use LPC HAL gpio functions
+/** \brief Simple sample of use LPC HAL gpio functions 
  **
  ** \addtogroup samples Sample projects
  ** \brief Sample projects to use as a starting point
@@ -63,15 +63,12 @@ int Cociente(int a, int b);
 int Suma(int a, int b) {
     return (a + b);
 }
-
 int Resta(int a, int b) {
     return (a - b);
 }
-
 int Producto(int a, int b) {
     return (a * b);
 }
-
 int Cociente(int a, int b) {
     return (a / b);
 }
@@ -84,29 +81,7 @@ int Cociente(int a, int b) {
 
 int main(void) {
 
-    int resultado = 0;
-    
-    calculadora_t mi_calculadora = CrearCalculadora();
-
-    
-    AgregarOperacion(mi_calculadora, '+', Suma);
-    AgregarOperacion(mi_calculadora, '-', Resta);
-    AgregarOperacion(mi_calculadora, '*', Producto);
-    AgregarOperacion(mi_calculadora, '/', Cociente);
-
-   
-    resultado = Calcular(mi_calculadora, "10+2");
-    printf("El resultado de la suma es:\n 10 + 2 = %i\n", resultado);
-
-    resultado = Calcular(mi_calculadora, "10-2");
-    printf("El resultado de la resta es:\n 10 - 2 = %i\n", resultado);
-
-    resultado = Calcular(mi_calculadora, "10*2");
-    printf("El resultado de la multiplicación es:\n 10 x 2 = %i\n", resultado);
-
-    resultado = Calcular(mi_calculadora, "10/2");
-    printf("El resultado de la division es:\n 10 / 2 = %i\n", resultado);
-
+ 
     return 0;
 }
 
